@@ -16,7 +16,8 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-    pass
+    payoffs_set = models.BooleanField(initial=False)
+    
 
 
 class Player(BasePlayer):
@@ -52,6 +53,21 @@ def get_multiplier(chosen_type, ball):
         return 1 if chosen_type == "A" else 1/3
     else:  # white
         return 1/3 if chosen_type == "A" else 1
+        
+def set_payoffs(group):
+    players = group.get_players()
+    others = player.get_others_in_group()
+    others_choices = [p.participant.choice for p in others]
+    n_opt_out_others = sum(1 for c in others_choices if c == 2)
+    for player in players:
+        player.ball = draw_ball()
+        player.multiplier = get_multiplier(player.participant.chosen_type, player.ball)
+        if player.participant.choice == 2:
+            player.payoff = cu(1.2)
+        elif player.participant.choice == 1:
+            player.payoff = (2.50 - 0.25 * n_opt_out_others) *  player.multiplier
+    group.payoffs_set = True
+
 
 """class Matching(WaitPage): 
     group_by_arrival_time = True
@@ -83,25 +99,27 @@ class Round3(Page):
 class FeedBack(Page):
     form_model = 'player'
     form_fields = ['fairness', 'fairness_text']
+    live_method = 'live_check_ready'
     def is_displayed(player):
         return player.round_number == 1
         
     @staticmethod
-    def before_next_page(player, timeout_happened):
-        player.ball = draw_ball()
-        player.multiplier = get_multiplier(player.participant.chosen_type, player.ball)
-        if player.participant.choice == 2:
-            player.payoff = cu(1.2)
+    def live_check_ready(player: Player, data):
+        g = player.group
+        ps = g.get_players()
 
-        elif player.participant.choice == 1:
-            others = player.get_others_in_group()
-            #others_choices = [p.participant.choice for p in others]  # list of choices
-            others_choices = [p.participant.field_maybe_none(choice) for p in others]
-            n_opt_out_others = sum(1 for c in others_choices if c == 2)
-            player.payoff = (2.50 - 0.25 * n_opt_out_others) *  player.multiplier
+        all_ready = all(p.choice is not None for p in ps)
+
+        # If everyone has chosen, compute payoffs ONCE and store them on server
+        if all_ready and not g.payoffs_set:
+            set_payoffs(g)
+
+        # Tell client only "ready or not" (no payoff info)
+        return {player.id_in_group: dict(all_ready=all_ready, payoffs_set=g.payoffs_set)}
+
+
+
             
-
-
 class End(Page):
   def is_displayed(player):
       return player.round_number == 1
