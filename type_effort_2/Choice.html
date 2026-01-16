@@ -1,0 +1,141 @@
+{{ block title }}
+ <center><strong> Choice</strong></center>
+{{ endblock }}
+
+{{ block content }}
+<body>
+<div class="card bg-light m-3">
+<div class="card-body">
+
+<p> So far you have earned {{payoff_r1}} in the first task and {{payoff_r2}} in the second task.
+After you complete this study, we will match you into a group with 5 other people who also participated in this study. 
+If you opt out of this next math task you will earn $1.20. 
+If you opt into this next math task, your payment will depend on your performance, on the random draw of the ball, and on how many of the other 5 people opt out of the task. 
+The effects of your performance and the color of the ball drawn are the same as in the previous two math tasks. 
+Your payment is reduced by the number of people that opt out. See the table below:
+
+</p>
+
+
+</div>
+</div>
+
+ <table class="payoff-table">
+  <center>For example,Effort=300</center>
+
+  <thead>
+    <tr>
+      <th class="blank"></th>
+      <th class="group" colspan="2">Type A</th>
+      <th class="group" colspan="2">Type B</th>
+    </tr>
+    <tr>
+      <th class="side">Number of<br>participants<br>that opt out</th>
+      <th>Black<br>Ball</th>
+      <th>White<br>Ball</th>
+      <th>Black<br>Ball</th>
+      <th>White<br>Ball</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="rowlab">0</td>
+      <td>$2.50</td>
+      <td>$0.83</td>
+      <td>$0.83</td>
+      <td>$2.50</td>
+    </tr>
+    <tr>
+      <td class="rowlab">1</td>
+      <td>$2.25</td>
+      <td>$0.75</td>
+      <td>$0.75</td>
+      <td>$2.25</td>
+    </tr>
+    <tr>
+      <td class="rowlab">2</td>
+      <td>$2.00</td>
+      <td>$0.67</td>
+      <td>$0.67</td>
+      <td>$2.00</td>
+    </tr>
+    <tr>
+      <td class="rowlab">3</td>
+      <td>$1.75</td>
+      <td>$0.58</td>
+      <td>$0.58</td>
+      <td>$1.75</td>
+    </tr>
+    <tr>
+      <td class="rowlab">4</td>
+      <td>$1.50</td>
+      <td>$0.50</td>
+      <td>$0.50</td>
+      <td>$1.50</td>
+    </tr>
+    <tr>
+      <td class="rowlab">5</td>
+      <td>$1.25</td>
+      <td>$0.42</td>
+      <td>$0.42</td>
+      <td>$1.25</td>
+    </tr>
+  </tbody>
+</table>
+
+ {{ formfields }}
+
+ <div class="center-container">
+      <button id="next" class="nexttab btn-primary btn next">Next</button>
+</div>
+</body>
+
+
+<style>
+    #box {
+  position: relative;
+  box-sizing:content-box;
+  width: 80%;
+</style>
+
+<style>
+  .payoff-table {
+    border-collapse: collapse;
+    margin: 12px auto;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+  }
+  .payoff-table caption {
+    caption-side: top;
+    font-size: 26px;
+    font-weight: 600;
+    padding: 8px 0 14px;
+  }
+  .payoff-table th,
+  .payoff-table td {
+    border: 3px solid #1f4cff; /* blue borders */
+    padding: 18px 22px;
+    text-align: center;
+    vertical-align: middle;
+    background: #fff;
+  }
+  .payoff-table th.group {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .payoff-table th.side {
+    width: 260px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .payoff-table th.blank {
+    background: #fff;
+    width: 120px;
+  }
+  .payoff-table td.rowlab {
+    font-weight: 600;
+    width: 120px;
+  }
+</style>
+{{ endblock }}
