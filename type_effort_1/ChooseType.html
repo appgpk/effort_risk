@@ -1,0 +1,64 @@
+{{ block title }}
+ <center><strong> Instuctions </strong></center>
+{{ endblock }}
+
+{{ block content }}
+<body>
+<div class="card bg-light m-3">
+<div class="card-body">
+<p>
+  You must choose which of two types you want to be: <strong>A</strong> or <strong>B</strong>.
+  For whichever type you choose, you will need to complete a short task to become that type.
+</p>
+
+ <p>
+  In each period, your earnings will depend on your effort, your type, and a random draw that determines
+  a multiplier for your type. The multiplier will either be <strong>1</strong> or <strong>1/3</strong>.
+  Your points will be your effort times the multiplier.
+</p>
+
+ <p>
+  For example, if your effort is <strong>300</strong>, you will receive either
+  <strong>300 × 1 = 300</strong> or <strong>300 × 1/3 = 100</strong> points, depending on the random draw.
+  For each <strong>300</strong> points you receive <strong>$2.50</strong>.
+</p>
+
+ <p>
+  The multiplier depends on whether the computer draws a <strong>black</strong> or a <strong>white</strong> ball from a bag.
+  The bag contains <strong>3 white balls</strong> and <strong>3 black balls</strong>.
+</p>
+
+ <ul>
+  <li>
+    If the computer draws a <strong>black</strong> ball, the multiplier is <strong>1</strong> for <strong>Type A</strong>
+    and <strong>1/3</strong> for <strong>Type B</strong>.
+  </li>
+  <li>
+    If the computer draws a <strong>white</strong> ball, the multiplier is <strong>1/3</strong> for <strong>Type A</strong>
+    and <strong>1</strong> for <strong>Type B</strong>.
+  </li>
+</ul>
+
+ <p>
+  Your effort depends on your performance in a simple math task. Each period, you will be asked to add pairs
+  of numbers for <strong>3 minutes</strong>. For each sum you correctly add, your effort will increase by
+  <strong>25</strong>. For example, if you correctly add <strong>12</strong> pairs of numbers, your effort will be
+  <strong>12 × 25 = 300</strong>.
+</p>
+ <center> {{ formfields }}</center>
+  
+</div>
+</div>
+<div class="center-container">
+      <button id="next" class="nexttab btn-primary btn next">Next</button>
+</div>
+</body>
+
+
+<style>
+    #box {
+  position: relative;
+  box-sizing:content-box;
+  width: 80%;
+</style>
+{{ endblock }}

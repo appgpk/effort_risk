@@ -1,0 +1,117 @@
+
+from otree.api import *
+c = cu
+
+doc = ''
+class C(BaseConstants):
+    NAME_IN_URL = 'type_effort_2'
+    PLAYERS_PER_GROUP = None
+    NUM_ROUNDS = 1
+
+
+class Subsession(BaseSubsession):
+    def creating_session(subsession):
+        subsession.group_randomly()
+
+
+
+class Group(BaseGroup):
+    pass
+
+
+class Player(BasePlayer):
+    num_correct = models.IntegerField()
+    ball = models.StringField()  
+    multiplier = models.FloatField()
+    effort = models.IntegerField()
+    points = models.IntegerField()
+    b1 = models.IntegerField(blank=False, label ="53+64=")
+    b2 = models.IntegerField(blank=False, label ="78+95=")
+    b3 = models.IntegerField(blank=False, label ="23+34=")
+    b4 = models.IntegerField(blank=False, label ="13+66=")
+    b5 = models.IntegerField(blank=False, label ="24+78=")
+    b6 = models.IntegerField(blank=False, label ="95+67=")
+    b7 = models.IntegerField(blank=False, label ="58+37=")
+    b8 = models.IntegerField(blank=False, label ="67+84=")
+    b9 = models.IntegerField(blank=False, label ="53+45=")
+    b10 = models.IntegerField(blank=False, label ="78+76=")
+    b11 = models.IntegerField(blank=False, label ="26+39=")
+    b12 = models.IntegerField(blank=False, label ="42+57=")
+    choice = models.IntegerField(blank=False,label ="Which do you choose?", choices=[[1, 'Participate in the math task and be paid according to the table above.'], [2, 'Opt out of the task and be paid $1.20.']],widget=widgets.RadioSelect)
+
+
+
+    
+
+
+def draw_ball():
+    import random 
+    return random.choice(["black", "white"])
+    
+def get_multiplier(chosen_type, ball):
+    if ball == "black":
+        return 1 if chosen_type == "A" else 1/3
+    else:  # white
+        return 1/3 if chosen_type == "A" else 1
+
+class Round2(Page):
+   timeout_seconds = 180
+   form_model = 'player'
+   form_fields = ['b1', 'b2', 'b3', 'b4',
+                 'b5', 'b6', 'b7', 'b8',
+                 'b9', 'b10', 'b11', 'b12']
+   def is_displayed(player):
+       return player.round_number == 1
+   @staticmethod
+   def before_next_page(player, timeout_happened):
+      
+       solutions = [53+64, 78+95, 23+34, 13+66, 24+78, 95+67, 58+37, 67+84, 53+45, 78+76, 26+39, 42+57]
+       answers = [player.b1, player.b2, player.b3, player.b4,
+                 player.b5, player.b6, player.b7, player.b8,
+                 player.b9, player.b10, player.b11, player.b12]
+       player.num_correct = sum(a == s for a, s in zip(answers, solutions))
+       player.effort = player.num_correct*25
+      
+       player.ball = draw_ball()
+       player.multiplier = get_multiplier(player.participant.chosen_type, player.ball)
+       player.points = int(round(player.effort * player.multiplier))
+       player.payoff = player.points * cu(2.50/300)
+
+
+
+
+      
+class Result2(Page):
+   form_model = 'player'
+   def is_displayed(player):
+       return player.round_number == 1
+   @staticmethod
+   def vars_for_template(self):
+     participant = self.participant
+     return dict(effort=self.effort, ball = self.ball, playerType=self.participant.chosen_type, multiplier = self.multiplier, points= self.points, payoff = self.payoff)
+
+
+
+
+
+class Choice(Page):
+   form_model = 'player'
+   form_fields = ['choice']
+   def is_displayed(player):
+       return player.round_number == 2
+   @staticmethod
+   def vars_for_template(player):
+       payoff_r1 = player.in_round(1).payoff
+       payoff_r2 = player.in_round(2).payoff
+       return dict(payoff_r1=payoff_r1, payoff_r2=payoff_r2)
+   
+   @staticmethod
+   def before_next_page(player, timeout_happened):
+       player.participant.vars['choice'] = player.choice    
+
+
+
+
+page_sequence = [Round2,Result2, Choice]
+
+
