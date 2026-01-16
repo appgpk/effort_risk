@@ -53,13 +53,13 @@ def get_multiplier(chosen_type, ball):
     else:  # white
         return 1/3 if chosen_type == "A" else 1
 
-"""class Matching(WaitPage): 
+class Matching(WaitPage): 
     group_by_arrival_time = True
     body_text = "Please, wait to be match you into a group with 5 other people."
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
-"""
+
 
 class Round3(Page):
     timeout_seconds = 180
@@ -111,6 +111,6 @@ class End(Page):
 
 
 
-page_sequence = [ Round3, FeedBack,End]
+page_sequence = [ Matching,Round3, FeedBack,End]
 
-#Matching,
+
