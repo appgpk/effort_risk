@@ -167,8 +167,8 @@ class Result1(Page):
     
     @staticmethod
     def before_next_page(player, timeout_happened):
-       player.participant.vars['chosen_type'] = player.chosen_type
-        player.participant.vars['payoff_1'] = player.payoff
+        player.participant.vars['chosen_type'] = player.chosen_type
+        player.participant.vars['payoff1'] = player.payoff
 
 page_sequence = [Consent,Introduction,ChooseType,Task1,Task2,Task3,Task4, Task5,TypeEarned,Round1,Result1]
 
