@@ -72,10 +72,6 @@ class Round3(Page):
         player.num_correct = sum(a == s for a, s in zip(answers, solutions))
         player.effort = player.num_correct * 25
 
-        player.ball = draw_ball()
-        player.multiplier = get_multiplier(player.participant.chosen_type, player.ball)
-        player.points = int(round(player.effort * player.multiplier))
-        player.payoff = player.points * cu(2.50 / 300)
 
 
 class FeedBack(Page):
