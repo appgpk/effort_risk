@@ -101,9 +101,9 @@ class Choice(Page):
        return player.round_number == 1
    @staticmethod
    def vars_for_template(player):
-       payoff_r1 = player.in_round(1).payoff
-       payoff_r2 = player.in_round(2).payoff
-       return dict(payoff_r1=payoff_r1, payoff_r2=payoff_r2)
+       payoff_1 = player.participant.get_players_by_app_name('type_effort_1')[0].payoff
+       payoff_2 = player.payoff
+       return dict(payoff_r1=payoff_1, payoff_r2=payoff_2)
    
    @staticmethod
    def before_next_page(player, timeout_happened):
