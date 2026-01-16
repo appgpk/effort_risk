@@ -5,7 +5,7 @@ c = cu
 doc = ''
 class C(BaseConstants):
     NAME_IN_URL = 'type_effort_3'
-    PLAYERS_PER_GROUP = 6
+    PLAYERS_PER_GROUP = 2
     NUM_ROUNDS = 1
 
 
@@ -96,7 +96,7 @@ class FeedBack(Page):
             player.payoff = cu(1.2)
 
         elif player.participant.choice == 1:
-            others = player.group.get_others_in_group()
+            others = player.get_others_in_group()
             others_choices = [p.participant.choice for p in others]  # list of choices
             n_opt_out_others = sum(1 for c in others_choices if c == 2)
             player.payoff = (2.50 - 0.25 * n_opt_out_others) *  player.multiplier
