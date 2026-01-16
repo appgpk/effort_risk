@@ -53,13 +53,13 @@ def get_multiplier(chosen_type, ball):
     else:  # white
         return 1/3 if chosen_type == "A" else 1
 
-class Matching(WaitPage): 
+"""class Matching(WaitPage): 
     group_by_arrival_time = True
     body_text = "Please, wait to be match you into a group with 5 other people."
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
-
+"""
 
 class Round3(Page):
     timeout_seconds = 180
@@ -80,8 +80,6 @@ class Round3(Page):
         player.num_correct = sum(a == s for a, s in zip(answers, solutions))
         player.effort = player.num_correct * 25
 
-
-
 class FeedBack(Page):
     form_model = 'player'
     form_fields = ['fairness', 'fairness_text']
@@ -97,7 +95,8 @@ class FeedBack(Page):
 
         elif player.participant.choice == 1:
             others = player.get_others_in_group()
-            others_choices = [p.participant.choice for p in others]  # list of choices
+            #others_choices = [p.participant.choice for p in others]  # list of choices
+            others_choices = [p.participant.field_maybe_none(choice) for p in others]
             n_opt_out_others = sum(1 for c in others_choices if c == 2)
             player.payoff = (2.50 - 0.25 * n_opt_out_others) *  player.multiplier
             
@@ -111,6 +110,6 @@ class End(Page):
 
 
 
-page_sequence = [ Matching,Round3, FeedBack,End]
-
+page_sequence = [Round3, FeedBack,End]
+# Matching
 
