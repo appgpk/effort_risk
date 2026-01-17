@@ -73,7 +73,6 @@ def set_payoffs(group: Group):
             # safety fallback in case something is missing
             p.payoff = cu(0)
 
-    group.payoffs_set = True
 
 
 class Round3(Page):
