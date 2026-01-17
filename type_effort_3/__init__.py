@@ -53,12 +53,27 @@ def get_multiplier(chosen_type, ball):
     else:  # white
         return 1/3 if chosen_type == "A" else 1
 
-class Matching(WaitPage): 
-    group_by_arrival_time = True
-    body_text = "Please, wait to be match you into a group with 5 other people."
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == 1
+def set_payoffs(group: Group):
+    players = group.get_players()
+
+    for p in players:
+        # Count how many OTHER players chose 2
+        others = p.get_others_in_group()
+        n_opt_out_others = sum(o.participant.choice == 2 for o in others)
+
+        p.ball = draw_ball()
+        p.multiplier = get_multiplier(p.participant.chosen_type, p.ball)
+
+        # Your payoff rule
+        if p.participant.choice == 2:
+            p.payoff = cu(1.2)
+        elif p.participant.choice == 1:
+            p.payoff = cu(2.50 - 0.25 * n_opt_out_others) * p.multiplier
+        else:
+            # safety fallback in case something is missing
+            p.payoff = cu(0)
+
+    group.payoffs_set = True
 
 
 class Round3(Page):
@@ -108,10 +123,15 @@ class End(Page):
       return player.round_number == 1
 
 
+class Matching(WaitPage): 
+    after_all_players_arrive = set_payoffs
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == 1
 
 
 
-page_sequence = [ Matching,Round3, FeedBack,End]
+page_sequence = [Round3, FeedBack,Matching,End]
 
 
 
