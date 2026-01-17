@@ -102,7 +102,7 @@ class FeedBack(Page):
     def is_displayed(player):
         return player.round_number == 1
         
-    @staticmethod
+    """@staticmethod
     def before_next_page(player, timeout_happened):
         player.ball = draw_ball()
         player.multiplier = get_multiplier(player.participant.chosen_type, player.ball)
@@ -113,7 +113,7 @@ class FeedBack(Page):
             others = player.get_others_in_group()
             others_choices = [p.participant.choice for p in others]  # list of choices
             n_opt_out_others = sum(1 for c in others_choices if c == 2)
-            player.payoff = (2.50 - 0.25 * n_opt_out_others) *  player.multiplier
+            player.payoff = (2.50 - 0.25 * n_opt_out_others) *  player.multiplier"""
             
 
 
