@@ -76,7 +76,10 @@ class Round2(Page):
       
        player.ball = draw_ball()
        player.multiplier = get_multiplier(player.participant.chosen_type, player.ball)
-       player.multiplier_display = str(player.multiplier)
+        if player.multiplier == 1 :
+            player.multiplier_display = "1"
+        else : 
+            player.multiplier_display = "1/3"
        player.points = int(round(player.effort * player.multiplier))
        player.payoff = player.points * cu(2.50/300)
 
