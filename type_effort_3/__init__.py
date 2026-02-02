@@ -63,12 +63,11 @@ def set_payoffs(group: Group):
         n_opt_out_others = sum(o.participant.choice == 2 for o in others)
         p.nb_opt_out = n_opt_out_others
         p.ball = draw_ball()
-        p.multiplier = get_multiplier(p.participant.chosen_type, p.ball)
-        if player.multiplier == 1 :
+        p.multiplier = get_multiplier(p.participant.chosen_type, p.ball)       
+        if player.multiplier == 1 : 
             player.multiplier_display = "1"
         else : 
-            player.multiplier_display = "1/3"        
-
+            player.multiplier_display = "1/3"
         #  payoff rule
         if p.participant.choice == 2:
             p.payoff = cu(0.83)
