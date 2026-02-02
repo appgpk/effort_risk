@@ -178,6 +178,6 @@ class Result1(Page):
         player.participant.vars['chosen_type'] = player.chosen_type
         player.participant.vars['payoff1'] = player.payoff
 
-page_sequence = [Introduction,ChooseType,#Task1,Task2,Task3,Task4, Task5,TypeEarned,Round1,Result1]
+page_sequence = [Introduction,ChooseType,Task1,Task2,Task3,Task4, Task5,TypeEarned,Round1,Result1]
 
 #Consent,
