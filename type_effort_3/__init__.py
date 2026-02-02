@@ -92,6 +92,19 @@ class Round3(Page):
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
+        if timeout_happened:
+            player.c1  = 0 if player.c1  is None else player.c1
+            player.c2  = 0 if player.c2  is None else player.c2
+            player.c3  = 0 if player.c3  is None else player.c3
+            player.c4  = 0 if player.c4  is None else player.c4
+            player.c5  = 0 if player.c5  is None else player.c5
+            player.c6  = 0 if player.c6  is None else player.c6
+            player.c7  = 0 if player.c7  is None else player.c7
+            player.c8  = 0 if player.c8  is None else player.c8
+            player.c9  = 0 if player.c9  is None else player.c9
+            player.c10 = 0 if player.c10 is None else player.c10
+            player.c11 = 0 if player.c11 is None else player.c11
+            player.c12 = 0 if player.c12 is None else player.c12
         solutions = [28+75, 64+31, 34+21, 54+67, 25+83, 27+92, 79+96, 38+75, 30+78, 37+34, 51+93, 28+76]
         answers = [player.c1, player.c2, player.c3, player.c4,
                    player.c5, player.c6, player.c7, player.c8,
