@@ -69,10 +69,10 @@ def set_payoffs(group: Group):
         if p.participant.choice == 2:
             p.payoff = cu(0.83)
         elif p.participant.choice == 1:
-            #p.points = int(round(p.effort * p.multiplier))
+            p.points = int(round(p.effort * p.multiplier))
             p.payoff = cu(2.50 - 0.25 * n_opt_out_others) * p.multiplier
         else:
-            #p.points = int(round(p.effort * p.multiplier))
+            p.points = int(round(p.effort * p.multiplier))
             p.payoff = cu(0)
 
 
