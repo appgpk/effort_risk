@@ -136,7 +136,7 @@ class TypeEarned(Page):
 
 
 class Round1(Page):
-    timeout_seconds =10
+    timeout_seconds =180
     form_model = 'player'
     form_fields = ['a1', 'a2', 'a3', 'a4',
                   'a5', 'a6', 'a7', 'a8',
