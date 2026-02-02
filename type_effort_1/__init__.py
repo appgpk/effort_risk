@@ -18,8 +18,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    #checkbox = models.BooleanField()
-    #prolific = models.StringField(label="Prolific ID")
+    checkbox = models.BooleanField()
+    prolific = models.StringField(label="Prolific ID")
     chosen_type = models.StringField(choices=[['A', 'A'], ['B', 'B']],blank=False,label="Please Select your type", widget=widgets.RadioSelectHorizontal)
     
     task1 = models.IntegerField(blank=False,choices=[[1, 'Considerate'], [2, 'Playful'],[3, 'Obnoxious'],[4, 'Motivated']], widget=widgets.RadioSelect, 
@@ -70,12 +70,12 @@ def get_multiplier(chosen_type, ball):
     else:  # white
         return 1/3 if chosen_type == "A" else 1
 
-#class Consent(Page):
-    #form_model = "player"
-    #form_fields = ["checkbox", 'prolific']
-    #@staticmethod
-    #def is_displayed(player: Player):
-        #return player.round_number == 1
+class Consent(Page):
+    form_model = "player"
+    form_fields = ["checkbox", 'prolific']
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number == 1
 
 class Introduction(Page):
     form_model = "player"
