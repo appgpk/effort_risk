@@ -23,6 +23,7 @@ class Player(BasePlayer):
     num_correct = models.IntegerField()
     ball = models.StringField()  
     multiplier = models.FloatField()
+    multiplier_display = models.StringField()
     effort = models.IntegerField()
     points = models.IntegerField()    
     c1 = models.IntegerField(blank=False, label ="28+75=")
@@ -63,6 +64,7 @@ def set_payoffs(group: Group):
         p.nb_opt_out = n_opt_out_others
         p.ball = draw_ball()
         p.multiplier = get_multiplier(p.participant.chosen_type, p.ball)
+        p.multiplier_display = str(p.multiplier)
         
 
         # Your payoff rule
@@ -128,7 +130,7 @@ class Result3(Page):
      participant = self.participant
      return dict(choice = self.participant.choice,
             effort=self.effort, ball = self.ball, playerType=self.participant.chosen_type,
-                 multiplier = self.multiplier, points= self.points, payoff = self.payoff, nb_opt_out = self.nb_opt_out)
+                 multiplier = self.multiplier_display, points= self.points, payoff = self.payoff, nb_opt_out = self.nb_opt_out)
 
 
 
