@@ -37,7 +37,7 @@ class Player(BasePlayer):
     b10 = models.IntegerField(blank=False, label ="78+76=")
     b11 = models.IntegerField(blank=False, label ="26+39=")
     b12 = models.IntegerField(blank=False, label ="42+57=")
-    choice = models.IntegerField(blank=False,label ="Which do you choose?", choices=[[1, 'Participate in the math task and be paid according to the table above.'], [2, 'Opt out of the task and be paid $1.20.']],widget=widgets.RadioSelect)
+    choice = models.IntegerField(blank=False,label ="Which do you choose?", choices=[[1, 'Participate in the math task and be paid according to the table above.'], [2, 'Opt out of the task and be paid $0.83.']],widget=widgets.RadioSelect)
 
 
 
