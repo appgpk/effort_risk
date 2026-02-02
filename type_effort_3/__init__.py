@@ -37,7 +37,7 @@ class Player(BasePlayer):
     c10 = models.IntegerField(blank=False, label ="37+34=")
     c11 = models.IntegerField(blank=False, label ="51+93=")
     c12 = models.IntegerField(blank=False, label ="28+76=")
-    
+    nb_opt_out = models.IntegerField()
     fairness = models.IntegerField(blank=False,choices=[[1, 'Very unfair'],[2, 'Somewhat unfair'],[3, 'Somewhat fair'],[4, 'Very fair']],widget=widgets.RadioSelect,
     label="How fair did you find the method of distributing payment based on your type, in the first two tasks?")
     fairness_text = models.LongStringField(label="Why do you think the method of distributing payment based on your type was unfair/fair?")
@@ -60,7 +60,7 @@ def set_payoffs(group: Group):
         # Count how many OTHER players chose 2
         others = p.get_others_in_group()
         n_opt_out_others = sum(o.participant.choice == 2 for o in others)
-
+        p.nb_opt_out = n_opt_out_others
         p.ball = draw_ball()
         p.multiplier = get_multiplier(p.participant.chosen_type, p.ball)
         
@@ -69,10 +69,10 @@ def set_payoffs(group: Group):
         if p.participant.choice == 2:
             p.payoff = cu(0.83)
         elif p.participant.choice == 1:
-            p.points = int(round(p.effort * p.multiplier))
+            #p.points = int(round(p.effort * p.multiplier))
             p.payoff = cu(2.50 - 0.25 * n_opt_out_others) * p.multiplier
         else:
-            p.points = int(round(p.effort * p.multiplier))
+            #p.points = int(round(p.effort * p.multiplier))
             p.payoff = cu(0)
 
 
@@ -128,7 +128,7 @@ class Result3(Page):
      participant = self.participant
      return dict(choice = self.participant.choice,
             effort=self.effort, ball = self.ball, playerType=self.participant.chosen_type,
-                 multiplier = self.multiplier, points= self.points, payoff = self.payoff)
+                 multiplier = self.multiplier, points= self.points, payoff = self.payoff, nb_opt_out = self.nb_opt_out)
 
 
 
