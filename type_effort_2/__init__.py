@@ -66,7 +66,19 @@ class Round2(Page):
        return player.round_number == 1
    @staticmethod
    def before_next_page(player, timeout_happened):
-      
+        if timeout_happened:
+            player.b1  = 0 if player.b1  is None else player.b1
+            player.b2  = 0 if player.b2  is None else player.b2
+            player.b3  = 0 if player.b3  is None else player.b3
+            player.b4  = 0 if player.b4  is None else player.b4
+            player.b5  = 0 if player.b5  is None else player.b5
+            player.b6  = 0 if player.b6  is None else player.b6
+            player.b7  = 0 if player.b7  is None else player.b7
+            player.b8  = 0 if player.b8  is None else player.b8
+            player.b9  = 0 if player.b9  is None else player.b9
+            player.b10 = 0 if player.b10 is None else player.b10
+            player.b11 = 0 if player.b11 is None else player.b11
+            player.b12 = 0 if player.b12 is None else player.b12
        solutions = [53+64, 78+95, 23+34, 13+66, 24+78, 95+67, 58+37, 67+84, 53+45, 78+76, 26+39, 42+57]
        answers = [player.b1, player.b2, player.b3, player.b4,
                  player.b5, player.b6, player.b7, player.b8,
