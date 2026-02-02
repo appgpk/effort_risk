@@ -63,15 +63,16 @@ def set_payoffs(group: Group):
 
         p.ball = draw_ball()
         p.multiplier = get_multiplier(p.participant.chosen_type, p.ball)
-        p.points = int(round(p.effort * p.multiplier))
+        
 
         # Your payoff rule
         if p.participant.choice == 2:
             p.payoff = cu(0.83)
         elif p.participant.choice == 1:
+            p.points = int(round(p.effort * p.multiplier))
             p.payoff = cu(2.50 - 0.25 * n_opt_out_others) * p.multiplier
         else:
-            # safety fallback in case something is missing
+            p.points = int(round(p.effort * p.multiplier))
             p.payoff = cu(0)
 
 
