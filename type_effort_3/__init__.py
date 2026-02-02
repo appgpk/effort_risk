@@ -122,7 +122,7 @@ class Matching(WaitPage):
 class Result3(Page):
    form_model = 'player'
    def is_displayed(player):
-       return player.round_number == 1 and player.choice == 1
+       return player.round_number == 1 and participant.choice == 1
    @staticmethod
    def vars_for_template(self):
      participant = self.participant
