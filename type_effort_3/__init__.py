@@ -63,6 +63,7 @@ def set_payoffs(group: Group):
 
         p.ball = draw_ball()
         p.multiplier = get_multiplier(p.participant.chosen_type, p.ball)
+        player.points = int(round(player.effort * player.multiplier))
 
         # Your payoff rule
         if p.participant.choice == 2:
@@ -102,18 +103,7 @@ class FeedBack(Page):
     def is_displayed(player):
         return player.round_number == 1
         
-    """@staticmethod
-    def before_next_page(player, timeout_happened):
-        player.ball = draw_ball()
-        player.multiplier = get_multiplier(player.participant.chosen_type, player.ball)
-        if player.participant.choice == 2:
-            player.payoff = cu(1.2)
 
-        elif player.participant.choice == 1:
-            others = player.get_others_in_group()
-            others_choices = [p.participant.choice for p in others]  # list of choices
-            n_opt_out_others = sum(1 for c in others_choices if c == 2)
-            player.payoff = (2.50 - 0.25 * n_opt_out_others) *  player.multiplier"""
             
 
 
@@ -128,9 +118,20 @@ class Matching(WaitPage):
     def is_displayed(player):
         return player.round_number == 1
 
+class Result3(Page):
+   form_model = 'player'
+   def is_displayed(player):
+       return player.round_number == 1
+   @staticmethod
+   def vars_for_template(self):
+     participant = self.participant
+     return dict(effort=self.effort, ball = self.ball, playerType=self.participant.chosen_type, 
+                 multiplier = self.multiplier, points= self.points, payoff = self.payoff)
 
 
-page_sequence = [Round3, FeedBack,Matching,End]
+
+
+page_sequence = [Round3, FeedBack, Matching, Result3, End]
 
 
 
