@@ -67,7 +67,7 @@ def set_payoffs(group: Group):
 
         # Your payoff rule
         if p.participant.choice == 2:
-            p.payoff = cu(1.2)
+            p.payoff = cu(0.83)
         elif p.participant.choice == 1:
             p.payoff = cu(2.50 - 0.25 * n_opt_out_others) * p.multiplier
         else:
