@@ -51,7 +51,7 @@ class Player(BasePlayer):
  
     num_correct = models.IntegerField()
     
-    ball = models.StringField()  # "black" or "white"
+    ball = models.StringField()  
     multiplier = models.FloatField()
     multiplier_display = models.StringField()
 
@@ -156,10 +156,6 @@ class Round1(Page):
         player.ball = draw_ball()
         player.multiplier = get_multiplier(player.chosen_type, player.ball)
         player.multiplier_display = str(player.multiplier)
-        """if player.multiplier == 1 :
-            player.multiplier_display = "1"
-        else : 
-            player.multiplier_display = "1/3""""
 
         player.points = int(round(player.effort * player.multiplier))
         player.payoff = player.points * cu(2.50/300)
@@ -172,8 +168,8 @@ class Result1(Page):
     @staticmethod
     def vars_for_template(self):
       participant = self.participant
-      return dict(effort=self.effort, ball = self.ball, playerType=self.chosen_type, multiplier = self.multiplier_display, points= self.points, payoff = self.payoff)
-    
+      return dict(effort=self.effort, ball = self.ball, playerType=self.chosen_type, 
+                  multiplier = self.multiplier_display, points= self.points, payoff = self.payoff)
     @staticmethod
     def before_next_page(player, timeout_happened):
         player.participant.vars['chosen_type'] = player.chosen_type
