@@ -141,24 +141,25 @@ class Round1(Page):
     form_fields = ['a1', 'a2', 'a3', 'a4',
                   'a5', 'a6', 'a7', 'a8',
                   'a9', 'a10', 'a11', 'a12']
-    if timeout_happened:
-        player.a1  = 0 if player.a1  is None else player.a1
-        player.a2  = 0 if player.a2  is None else player.a2
-        player.a3  = 0 if player.a3  is None else player.a3
-        player.a4  = 0 if player.a4  is None else player.a4
-        player.a5  = 0 if player.a5  is None else player.a5
-        player.a6  = 0 if player.a6  is None else player.a6
-        player.a7  = 0 if player.a7  is None else player.a7
-        player.a8  = 0 if player.a8  is None else player.a8
-        player.a9  = 0 if player.a9  is None else player.a9
-        player.a10 = 0 if player.a10 is None else player.a10
-        player.a11 = 0 if player.a11 is None else player.a11
-        player.a12 = 0 if player.a12 is None else player.a12
+
         
     def is_displayed(player):
         return player.round_number == 1
     @staticmethod
     def before_next_page(player, timeout_happened):
+        if timeout_happened:
+            player.a1  = 0 if player.a1  is None else player.a1
+            player.a2  = 0 if player.a2  is None else player.a2
+            player.a3  = 0 if player.a3  is None else player.a3
+            player.a4  = 0 if player.a4  is None else player.a4
+            player.a5  = 0 if player.a5  is None else player.a5
+            player.a6  = 0 if player.a6  is None else player.a6
+            player.a7  = 0 if player.a7  is None else player.a7
+            player.a8  = 0 if player.a8  is None else player.a8
+            player.a9  = 0 if player.a9  is None else player.a9
+            player.a10 = 0 if player.a10 is None else player.a10
+            player.a11 = 0 if player.a11 is None else player.a11
+            player.a12 = 0 if player.a12 is None else player.a12
         solutions = [83+51,49+62, 73+87,92+25, 52+23, 68+39, 97+61,46+14, 35+68,69+87 , 23+47,14+68]
         answers = [player.a1, player.a2, player.a3, player.a4,
                   player.a5, player.a6, player.a7, player.a8,
