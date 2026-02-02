@@ -125,8 +125,8 @@ class Result3(Page):
    @staticmethod
    def vars_for_template(self):
      participant = self.participant
-     return dict(effort=self.effort, ball = self.ball, playerType=self.participant.chosen_type, 
-                 multiplier = self.multiplier, points= self.points, payoff = self.payoff)
+     return dict(choice = self.participant.choice)
+       #effort=self.effort, ball = self.ball, playerType=self.participant.chosen_type,multiplier = self.multiplier, points= self.points, payoff = self.payoff,
 
 
 
