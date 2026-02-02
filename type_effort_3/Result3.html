@@ -1,0 +1,37 @@
+{{ block title }}
+ <center><strong> Results</strong></center>
+{{ endblock }}
+
+{{ block content }}
+<body>
+<div class="card bg-light m-3">
+<div class="card-body">
+
+<p>
+ Your effort in this round was {{effort}} points . 
+ The computer drew a {{ball}} ball . 
+ Since your type is {{playerType}} the multiplier is {{multiplier}}. 
+ You'll gain {{points}} points for your efforts, and completing the first task will earn you {{payoff}}.
+</p>
+
+<br>
+
+ <p>
+
+
+ </p>
+</div>
+</div>
+<div class="center-container">
+      <button id="next" class="nexttab btn-primary btn next">Next</button>
+</div>
+</body>
+
+
+<style>
+    #box {
+  position: relative;
+  box-sizing:content-box;
+  width: 80%;
+</style>
+{{ endblock }}
