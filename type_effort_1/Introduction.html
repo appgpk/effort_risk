@@ -12,7 +12,10 @@
         Please put away all materials unrelated to the experiment to avoid distraction.
     </p>
  <h3><u>Email :</u></h3>
-{{ formfield email type="email"  }}
+ <label for="email">Enter your email:</label>
+
+<input type="email" id="email" pattern=".+@example\.com" size="30" required />
+{{ formfield  }}
 </div>
 </div>
 <div class="center-container">
