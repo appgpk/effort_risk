@@ -18,7 +18,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
     email = models.StringField(label = "Please enter your email address:")
     chosen_type = models.StringField(choices=[['A', 'A'], ['B', 'B']],blank=False,label="Please Select your type", widget=widgets.RadioSelectHorizontal)
     
@@ -73,6 +72,7 @@ def get_multiplier(chosen_type, ball):
 
 class Introduction(Page):
     form_model = "player"
+    form_fields = ['email']
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 1
