@@ -73,10 +73,14 @@ def get_multiplier(chosen_type, ball):
 
 class Introduction(Page):
     form_model = "player"
-    form_fields = ['email']
+    #form_fields = ['email']
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 1
+    def live_method(player: Player, data):
+      if 'email in data:
+          player.email = data['email']
+
 
 class ChooseType(Page):
     form_model = 'player'
