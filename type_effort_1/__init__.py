@@ -18,7 +18,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    email = models.StringField(label = "Please enter your email address:")
+    email = models.StringField()
+    #label = "Please enter your email address:"
     chosen_type = models.StringField(choices=[['A', 'A'], ['B', 'B']],blank=False,label="Please Select your type", widget=widgets.RadioSelectHorizontal)
     
     task1 = models.IntegerField(blank=False,choices=[[1, 'Considerate'], [2, 'Playful'],[3, 'Obnoxious'],[4, 'Motivated']], widget=widgets.RadioSelect, 
