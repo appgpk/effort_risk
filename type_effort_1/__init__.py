@@ -76,7 +76,7 @@ class Introduction(Page):
     #form_fields = ['email']
     @staticmethod
     def live_method(player: Player, data):
-        if 'email in data:
+        if 'email' in data:
           player.email = data['email']
     @staticmethod
     def is_displayed(player: Player):
