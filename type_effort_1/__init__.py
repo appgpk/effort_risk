@@ -77,9 +77,7 @@ class Introduction(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 1
-    def live_method(player: Player, data):
-      if 'email in data:
-          player.email = data['email']
+
 
 
 class ChooseType(Page):
