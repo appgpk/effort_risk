@@ -142,6 +142,7 @@ class Result3(Page):
         return player.round_number == 1 
     @staticmethod
     def vars_for_template(player):
+        participant = self.participant
 
         if participant.choice == 1:
             return dict(
