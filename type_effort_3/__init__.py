@@ -148,7 +148,7 @@ class Result3(Page):
             return dict(
                 choice=self.participant.choice,
                 ball=self.ball,
-                playerType=self.chosen_type,
+                playerType=self.participant.chosen_type,
                 effort=self.effort,
                 multiplier=self.multiplier_display,
                 points=self.points,
@@ -159,7 +159,7 @@ class Result3(Page):
             return dict(
                 choice=self.participant.choice,
                 ball=self.ball,
-                playerType=self.chosen_type,
+                playerType=self.participant.chosen_type,
                 multiplier=self.multiplier_display,
                 payoff=self.payoff,
                 nb_opt_out=self.nb_opt_out,
