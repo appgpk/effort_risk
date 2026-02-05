@@ -157,7 +157,7 @@ class Result3(Page):
             )
         else:
             return dict(
-                choice=self.participant.choicee,
+                choice=self.participant.choice,
                 ball=player.ball,
                 playerType=player.chosen_type,
                 multiplier=player.multiplier_display,
