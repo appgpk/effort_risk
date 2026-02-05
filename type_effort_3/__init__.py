@@ -143,9 +143,9 @@ class Result3(Page):
     @staticmethod
     def vars_for_template(player):
 
-        if player.choice == 1:
+        if participant.choice == 1:
             return dict(
-                choice=player.choice,
+                choice=self.participant.choice,
                 ball=player.ball,
                 playerType=player.chosen_type,
                 effort=player.effort,
@@ -156,7 +156,7 @@ class Result3(Page):
             )
         else:
             return dict(
-                choice=player.choice,
+                choice=self.participant.choicee,
                 ball=player.ball,
                 playerType=player.chosen_type,
                 multiplier=player.multiplier_display,
