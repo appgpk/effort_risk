@@ -142,7 +142,7 @@ class Result3(Page):
    @staticmethod
    def vars_for_template(self):
      participant = self.participant
-     return dict(choice = self.participant.choice, ball = self.ball, playerType=self.participant.chosen_type,
+     return dict(choice = self.participant.choice, ball = self.ball, playerType=self.participant.chosen_type, effort = self.effort
                  multiplier = self.multiplier_display, points= self.points, payoff = self.payoff, nb_opt_out = self.nb_opt_out)
 
 
