@@ -5,7 +5,7 @@ c = cu
 doc = ''
 class C(BaseConstants):
     NAME_IN_URL = 'type_effort_3'
-    PLAYERS_PER_GROUP = 6
+    PLAYERS_PER_GROUP = 2
     NUM_ROUNDS = 1
 
 
