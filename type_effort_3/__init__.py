@@ -141,7 +141,7 @@ class Result3(Page):
     def is_displayed(player):
         return player.round_number == 1 
     @staticmethod
-    def vars_for_template(player):
+    def vars_for_template(self):
         participant = self.participant
 
         if participant.choice == 1:
