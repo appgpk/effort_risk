@@ -136,15 +136,33 @@ class Matching(WaitPage):
         return player.round_number == 1
 
 class Result3(Page):
-   form_model = 'player'
-   def is_displayed(player):
-       return player.round_number == 1 
-   @staticmethod
-   def vars_for_template(self):
-     participant = self.participant
-     return dict(choice = self.participant.choice, ball = self.ball, playerType=self.participant.chosen_type, effort = self.effort
-                 multiplier = self.multiplier_display, points= self.points, payoff = self.payoff, nb_opt_out = self.nb_opt_out)
+    form_model = 'player'
 
+    def is_displayed(player):
+        return player.round_number == 1 
+    @staticmethod
+    def vars_for_template(player):
+
+        if player.choice == 1:
+            return dict(
+                choice=player.choice,
+                ball=player.ball,
+                playerType=player.chosen_type,
+                effort=player.effort,
+                multiplier=player.multiplier_display,
+                points=player.points,
+                payoff=player.payoff,
+                nb_opt_out=player.nb_opt_out,
+            )
+        else:
+            return dict(
+                choice=player.choice,
+                ball=player.ball,
+                playerType=player.chosen_type,
+                multiplier=player.multiplier_display,
+                payoff=player.payoff,
+                nb_opt_out=player.nb_opt_out,
+            )
 
 
 
