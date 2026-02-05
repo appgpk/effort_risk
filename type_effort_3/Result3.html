@@ -6,20 +6,28 @@
 <body>
 <div class="card bg-light m-3">
 <div class="card-body">
-
+ 
+{{ if choice == 1 }}
 <p>
- Your effort in this round was {{effort}} points . 
- The computer drew a {{ball}} ball . 
- Since your type is {{playerType}} the multiplier is {{multiplier }}. In total, {{nb_opt_out}} participants dropped out of the group.
- You'll gain {{points}} points for your efforts, and completing the third task will earn you {{payoff}}.
+Your effort in this round was {{ effort }} points.
+The computer drew a {{ ball }} ball.
+Since your type is {{ playerType }}, the multiplier is {{ multiplier }}.
+In total, {{ nb_opt_out }} participants dropped out of the group.
+You'll gain {{ points }} points for your efforts, and completing the third task will earn you {{ payoff }}.
 </p>
- <center>
-  Your total payoff is {{payoff}}.
 
- </center>
+<center>
+Your total payoff is {{ payoff }}.
+</center>
+
 <br>
 
- <p>
+{{ elif choice == 0 }}
+<center>
+Your total payoff is {{ payoff }}.
+</center>
+
+{{ endif }}
 
  </p>
 </div>
