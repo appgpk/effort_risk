@@ -147,22 +147,22 @@ class Result3(Page):
         if participant.choice == 1:
             return dict(
                 choice=self.participant.choice,
-                ball=player.ball,
-                playerType=player.chosen_type,
-                effort=player.effort,
-                multiplier=player.multiplier_display,
-                points=player.points,
-                payoff=player.payoff,
-                nb_opt_out=player.nb_opt_out,
+                ball=self.ball,
+                playerType=self.chosen_type,
+                effort=self.effort,
+                multiplier=self.multiplier_display,
+                points=self.points,
+                payoff=self.payoff,
+                nb_opt_out=self.nb_opt_out,
             )
         else:
             return dict(
                 choice=self.participant.choice,
-                ball=player.ball,
-                playerType=player.chosen_type,
-                multiplier=player.multiplier_display,
-                payoff=player.payoff,
-                nb_opt_out=player.nb_opt_out,
+                ball=self.ball,
+                playerType=self.chosen_type,
+                multiplier=self.multiplier_display,
+                payoff=self.payoff,
+                nb_opt_out=self.nb_opt_out,
             )
 
 
