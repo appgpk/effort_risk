@@ -123,8 +123,9 @@ class Choice(Page):
    def vars_for_template(player):
        payoff_1 = player.participant.payoff1
        payoff_2 = player.payoff
-       return dict(payoff_r1=payoff_1, payoff_r2=payoff_2)
-   
+       #return dict(payoff_r1=payoff_1, payoff_r2=payoff_2)
+       return dict(payoff_r1=0, payoff_r2=0)
+
    @staticmethod
    def before_next_page(player, timeout_happened):
        player.participant.vars['choice'] = player.choice
