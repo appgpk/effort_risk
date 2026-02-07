@@ -57,13 +57,12 @@ def get_multiplier(chosen_type, ball):
 def set_payoffs(group: Group):
     import random
     # pool of *all* players in this round (since group size is 1)
-  
-
+    all_players = get_players()
     for p in all_players:
-        all_players = p.get_others_in_group()
+        
         # --- draw 5 "other participants" ---
-        pool = [x for x in all_players]
-        # if x.id_in_group != p.id_in_group
+        pool = [x for x in all_players if x.id_in_group != p.id_in_group]
+        
         drawn = random.sample(pool, k=min(2, len(pool))) 
 
         # count opt-outs among the drawn players
