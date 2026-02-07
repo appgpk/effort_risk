@@ -57,7 +57,7 @@ def get_multiplier(chosen_type, ball):
 def set_payoffs(group: Group):
     import random
     # pool of *all* players in this round (since group size is 1)
-    all_players = get_players()
+    all_players = group.get_players()
     for p in all_players:
         
         # --- draw 5 "other participants" ---
