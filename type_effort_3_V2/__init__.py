@@ -55,6 +55,7 @@ def get_multiplier(chosen_type, ball):
         return 1/3 if chosen_type == "A" else 1
 
 def set_payoffs(group: Group):
+    import random
     # pool of *all* players in this round (since group size is 1)
     all_players = group.subsession.get_players()
 
