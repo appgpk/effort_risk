@@ -62,7 +62,7 @@ def set_payoffs(group: Group):
     for p in all_players:
         # --- draw 5 "other participants" ---
         pool = [x for x in all_players if x.id_in_group != p.id_in_group]
-        drawn = random.sample(pool, k=min(5, len(pool))) 
+        drawn = random.sample(pool, k=min(2, len(pool))) 
 
         # count opt-outs among the drawn players
         n_opt_out_drawn = sum(x.participant.choice == 2 for x in drawn)
