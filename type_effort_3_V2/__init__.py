@@ -5,7 +5,7 @@ c = cu
 doc = ''
 class C(BaseConstants):
     NAME_IN_URL = 'type_effort_3'
-    PLAYERS_PER_GROUP = 6
+    PLAYERS_PER_GROUP = 1
     NUM_ROUNDS = 1
 
 
@@ -55,29 +55,35 @@ def get_multiplier(chosen_type, ball):
         return 1/3 if chosen_type == "A" else 1
 
 def set_payoffs(group: Group):
-    players = group.get_players()
+    # pool of *all* players in this round (since group size is 1)
+    all_players = group.subsession.get_players()
 
-    for p in players:
-        # Count how many OTHER players chose 2
-        others = p.get_others_in_group()
-        n_opt_out_others = sum(o.participant.choice == 2 for o in others)
-        p.nb_opt_out = n_opt_out_others
+    for p in all_players:
+        # --- draw 5 "other participants" ---
+        pool = [x for x in all_players if x.id_in_subsession != p.id_in_subsession]
+        drawn = random.sample(pool, k=min(5, len(pool))) 
+
+        # count opt-outs among the drawn players
+        n_opt_out_drawn = sum(x.participant.choice == 2 for x in drawn)
+
+        # store it (your variable name)
+        p.nb_opt_out = n_opt_out_drawn
+
+        # --- draw ball & multiplier ---
         p.ball = draw_ball()
-        p.multiplier = get_multiplier(p.participant.chosen_type, p.ball)       
-        if p.multiplier == 1 : 
-            p.multiplier_display = "1"
-        else : 
-            p.multiplier_display = "1/3"
-        #  payoff rule
-        if p.participant.choice == 2:
-            p.payoff = cu(0.83)
-        elif p.participant.choice == 1:
-            p.points = int(round(p.effort * p.multiplier))
-            p.payoff = cu(2.50 - 0.25 * n_opt_out_others) * p.multiplier
-        else:
-            p.points = int(round(p.effort * p.multiplier))
-            p.payoff = cu(0)
+        p.multiplier = get_multiplier(p.participant.chosen_type, p.ball)
+        p.multiplier_display = "1" if p.multiplier == 1 else "1/3"
 
+        # --- payoff rule ---
+        if p.participant.choice == 2:  # opt-out
+            p.points = 0
+            p.payoff = cu(0.83)
+
+        else :  # opt-in
+            p.points = int(round(p.effort * p.multiplier))
+            # depends on how many of the 5 drawn opted out
+            base = cu(2.50 - 0.25 * n_opt_out_drawn)
+            p.payoff = base * p.multiplier
 
 
 class Round3(Page):
