@@ -41,7 +41,7 @@ class Player(BasePlayer):
     nb_opt_out = models.IntegerField()
     fairness = models.IntegerField(blank=False,choices=[[1, 'Very unfair'],[2, 'Somewhat unfair'],[3, 'Somewhat fair'],[4, 'Very fair']],widget=widgets.RadioSelect,
     label="How fair did you find the method of distributing payment based on your type, in the first two tasks?")
-    fairness_text = models.LongStringField(label="Why do you think the method of distributing payment based on your type was unfair/fair?", blank = True)
+    fairness_text = models.LongStringField(label="Why do you think the method of distributing payment based on your type was unfair/fair?")
 
 
 def draw_ball():
