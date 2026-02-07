@@ -54,36 +54,46 @@ def get_multiplier(chosen_type, ball):
     else:  # white
         return 1/3 if chosen_type == "A" else 1
 
-def set_payoffs(group: Group):
+def set_payoffs(subsession: Subsession):
     import random
-    # pool of *all* players in this round (since group size is 1)
-    all_players = group.get_players()
+    # pool of *all* players in this round
+    all_players = subsession.get_players()
+
     for p in all_players:
-        
-        # --- draw 5 "other participants" ---
-        pool = [x for x in all_players if x.id_in_group != p.id_in_group]
-        
-        drawn = random.sample(pool, k=min(2, len(pool))) 
+
+        # --- draw OTHER participants (exclude me) ---
+        pool = [x for x in all_players if x.id_in_subsession != p.id_in_subsession]
+        drawn = random.sample(pool, k=min(2, len(pool)))  # change 2 -> 5 if you want
 
         # count opt-outs among the drawn players
-        n_opt_out_drawn = sum(x.participant.choice == 2 for x in drawn)
-
-        # store it (your variable name)
+        n_opt_out_drawn = sum(getattr(x.participant, "choice", None) == 2 for x in drawn)
         p.nb_opt_out = n_opt_out_drawn
 
         # --- draw ball & multiplier ---
         p.ball = draw_ball()
-        p.multiplier = get_multiplier(p.participant.chosen_type, p.ball)
+
+        # SAFELY get chosen_type (avoid KeyError)
+        chosen_type = getattr(p.participant, "chosen_type", None)
+        if chosen_type is None:
+            # fallback if you stored it on Player instead
+            chosen_type = getattr(p, "chosen_type", None)
+        if chosen_type is None:
+            raise RuntimeError("chosen_type is missing. Set it before Matching/WaitPage.")
+
+        p.multiplier = get_multiplier(chosen_type, p.ball)
         p.multiplier_display = "1" if p.multiplier == 1 else "1/3"
 
         # --- payoff rule ---
-        if p.participant.choice == 2:  # opt-out
+        choice = getattr(p.participant, "choice", None)
+
+        if choice == 2:  # opt-out
             p.points = 0
             p.payoff = cu(0.83)
 
-        else :  # opt-in
+        else:  # opt-in (or any non-2 case)
+            if p.effort is None:
+                raise RuntimeError("effort is missing. Make sure effort is filled before Matching/WaitPage.")
             p.points = int(round(p.effort * p.multiplier))
-            # depends on how many of the 5 drawn opted out
             base = cu(2.50 - 0.25 * n_opt_out_drawn)
             p.payoff = base * p.multiplier
 
@@ -138,7 +148,7 @@ class End(Page):
 
 
 class Matching(WaitPage): 
-    #wait_for_all_groups = True
+    wait_for_all_groups = True
     after_all_players_arrive = set_payoffs
     @staticmethod
     def is_displayed(player):
