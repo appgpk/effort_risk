@@ -133,6 +133,6 @@ class Choice(Page):
 
 
 
-page_sequence = [Round2,Result2, Choice]
-
+page_sequence = [Choice]
+#Round2,Result2, 
 
