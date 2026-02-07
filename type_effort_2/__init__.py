@@ -121,8 +121,8 @@ class Choice(Page):
        return player.round_number == 1
    @staticmethod
    def vars_for_template(player):
-       payoff_1 = player.participant.payoff1
-       payoff_2 = player.payoff
+       #payoff_1 = player.participant.payoff1
+       #payoff_2 = player.payoff
        #return dict(payoff_r1=payoff_1, payoff_r2=payoff_2)
        return dict(payoff_r1=0, payoff_r2=0)
 
