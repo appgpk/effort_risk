@@ -138,7 +138,7 @@ class End(Page):
 
 
 class Matching(WaitPage): 
-    wait_for_all_groups = True
+    #wait_for_all_groups = True
     after_all_players_arrive = set_payoffs
     @staticmethod
     def is_displayed(player):
